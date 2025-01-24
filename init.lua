@@ -85,7 +85,7 @@ require('lazy').setup({
   { "MunifTanjim/prettier.nvim", config = function()
         require("prettier").setup({
             bin = 'prettier',  -- or 'prettierd' if you prefer the daemon version
-            filetypes = { "css", "html", "javascript", "typescript", "json", "markdown" },
+            filetypes = { "css" },
         })
     end },
   -- NOTE: This is where your plugins related to LSP can be installed.
