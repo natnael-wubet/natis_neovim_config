@@ -44,8 +44,8 @@ return {
 					hide_gitignored = true,
 					never_show = { ".git", "node_modules", ".cache" },
 				},
-				follow_current_file = { enabled = false },
-				use_libuv_file_watcher = false,
+				follow_current_file = { enabled = true },
+				use_libuv_file_watcher = true,
 				scan_mode = "fast",
 			},
 			window = {
