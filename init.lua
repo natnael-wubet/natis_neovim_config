@@ -81,11 +81,19 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   -- 'tpope/vim-sleuth',
 
+    { "jose-elias-alvarez/null-ls.nvim" },
+  { "MunifTanjim/prettier.nvim", config = function()
+        require("prettier").setup({
+            bin = 'prettier',  -- or 'prettierd' if you prefer the daemon version
+            filetypes = { "css", "html", "javascript", "typescript", "json", "markdown" },
+        })
+    end },
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
@@ -99,7 +107,13 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-
+{
+  "L3MON4D3/LuaSnip", -- Snippet engine
+  dependencies = { "rafamadriz/friendly-snippets" }, -- Optional snippet collection
+  config = function()
+    require("luasnip.loaders.from_vscode").lazy_load() -- Load snippets from friendly-snippets
+  end,
+},
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -237,7 +251,12 @@ require('lazy').setup({
 
   { import = 'custom.plugins' },
 }, {})
-
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*.css" },  -- Add other file types as needed
+    callback = function()
+        require("prettier").format()  -- Call the format function from prettier plugin
+    end,
+})
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -543,6 +562,7 @@ vim.defer_fn(function()
         telemetry = { enable = false },
       },
     },
+    pyright = {},  -- or
   }
 
   -- Setup neovim lua configuration
@@ -647,3 +667,6 @@ pcall(vim.cmd, 'autocmd BufWritePost init.lua source %')
 vim.cmd [[
     tnoremap <Esc> <C-\><C-n>
 ]]
+
+-- Add this in your config
+vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format current buffer' })
