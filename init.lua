@@ -85,7 +85,7 @@ require('lazy').setup({
   { "MunifTanjim/prettier.nvim", config = function()
         require("prettier").setup({
             bin = 'prettier',  -- or 'prettierd' if you prefer the daemon version
-            filetypes = { "css" },
+            filetypes = { "css","tsx" },
         })
     end },
   -- NOTE: This is where your plugins related to LSP can be installed.
@@ -252,7 +252,7 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 }, {})
 vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = { "*.css" },  -- Add other file types as needed
+    pattern = { "*.css","*.tsx" },  -- Add other file types as needed
     callback = function()
         require("prettier").format()  -- Call the format function from prettier plugin
     end,
