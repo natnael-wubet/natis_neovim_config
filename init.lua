@@ -582,7 +582,8 @@ vim.defer_fn(function()
 		ensure_installed = vim.tbl_keys(servers),
 	}
 
-	mason_lspconfig.setup_handlers {
+	mason_lspconfig.setup({
+  handlers = { 
 		function(server_name)
 			require('lspconfig')[server_name].setup {
 				capabilities = capabilities,
@@ -592,6 +593,7 @@ vim.defer_fn(function()
 			}
 		end,
 	}
+	})
 end, 100)
 
 -- [[ Configure nvim-cmp ]]
