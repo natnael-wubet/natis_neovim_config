@@ -81,12 +81,12 @@ require('lazy').setup({
 	-- Detect tabstop and shiftwidth automatically
 	-- 'tpope/vim-sleuth',
 
-	{ "jose-elias-alvarez/null-ls.nvim" },
+	-- { "jose-elias-alvarez/null-ls.nvim" },
 	{
 		"MunifTanjim/prettier.nvim",
 		config = function()
 			require("prettier").setup({
-				bin = 'prettier',     -- or 'prettierd' if you prefer the daemon version
+				bin = 'prettier', -- or 'prettierd' if you prefer the daemon version
 				filetypes = { "css", "tsx" },
 			})
 		end
@@ -111,7 +111,7 @@ require('lazy').setup({
 		},
 	},
 	{
-		"L3MON4D3/LuaSnip",                                -- Snippet engine
+		"L3MON4D3/LuaSnip",                               -- Snippet engine
 		dependencies = { "rafamadriz/friendly-snippets" }, -- Optional snippet collection
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load() -- Load snippets from friendly-snippets
@@ -134,7 +134,7 @@ require('lazy').setup({
 	},
 
 	-- Useful plugin to show you pending keybinds.
-	{ 'folke/which-key.nvim',           opts = {} },
+	{ 'folke/which-key.nvim',  opts = {} },
 	{
 		-- Adds git related signs to the gutter, as well as utilities for managing changes
 		'lewis6991/gitsigns.nvim',
@@ -207,7 +207,7 @@ require('lazy').setup({
 	},
 
 	-- "gc" to comment visual regions/lines
-	{ 'numToStr/Comment.nvim',  opts = {} },
+	{ 'numToStr/Comment.nvim', opts = {} },
 
 	-- Fuzzy Finder (files, lsp, etc)
 	{
@@ -255,9 +255,9 @@ require('lazy').setup({
 	{ import = 'custom.plugins' },
 }, {})
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.css", "*.tsx" },    -- Add other file types as needed
+	pattern = { "*.css", "*.tsx" }, -- Add other file types as needed
 	callback = function()
-		require("prettier").format()     -- Call the format function from prettier plugin
+		require("prettier").format() -- Call the format function from prettier plugin
 	end,
 })
 -- [[ Setting options ]]
@@ -583,16 +583,16 @@ vim.defer_fn(function()
 	}
 
 	mason_lspconfig.setup({
-  handlers = { 
-		function(server_name)
-			require('lspconfig')[server_name].setup {
-				capabilities = capabilities,
-				on_attach = on_attach,
-				settings = servers[server_name],
-				filetypes = (servers[server_name] or {}).filetypes,
-			}
-		end,
-	}
+		handlers = {
+			function(server_name)
+				require('lspconfig')[server_name].setup {
+					capabilities = capabilities,
+					on_attach = on_attach,
+					settings = servers[server_name],
+					filetypes = (servers[server_name] or {}).filetypes,
+				}
+			end,
+		}
 	})
 end, 100)
 
